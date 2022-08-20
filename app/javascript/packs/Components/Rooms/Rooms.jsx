@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import './rooms.css'
+import { Link } from 'react-router-dom'
+import Room from '../Room/Room'
 
 const Rooms = () => {
 
@@ -12,12 +15,24 @@ const Rooms = () => {
         setRooms(data.data)
         console.log(data.data)
       })
-  }, [])
-
-  console.log(rooms);
+  }, [rooms.length])
 
   return(
-    <div>Rooms PAGE !!!!!!</div>
+    <div className="rooms-index-container">
+      {rooms.length > 0 &&
+      <div>
+        {rooms.map((room) => {
+          return <Link to={"/rooms/" + room.id} element={<Room />}>
+                    <div className="rooms-card" key={room.id}>
+                      {room.attributes.name}
+                    </div>
+                  </Link>
+
+        })}
+      </div>
+      }
+
+    </div>
   )
 }
 
