@@ -6,7 +6,7 @@ module Api
 
       def index
         rooms = Room.all
-        render json: RoomSerializer.new(rooms).serialized_json
+        render json: RoomSerializer.new(rooms, options).serialized_json
       end
 
       def show
@@ -21,7 +21,7 @@ module Api
       end
 
       def options
-        @options ||= { include: %i[messages users] }
+        @options ||= { include: %i[messages] }
       end
 
     end
